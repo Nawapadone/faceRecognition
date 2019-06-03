@@ -5,14 +5,15 @@ import firebase from 'firebase'
 
 Vue.config.productionTip = false
 
+// Your web app's Firebase configuration
 var firebaseConfig = {
-  apiKey: "AIzaSyAWf0Le8TwWO3Fq9KwdOQWjLlE8D5YYXeM",
-  authDomain: "facerecognition-b6c43.firebaseapp.com",
-  databaseURL: "https://facerecognition-b6c43.firebaseio.com",
-  projectId: "facerecognition-b6c43",
-  storageBucket: "facerecognition-b6c43.appspot.com",
-  messagingSenderId: "679829275861",
-  appId: "1:679829275861:web:1ce02000211a6959"
+  apiKey: "AIzaSyApzkfrAO5FzptWyOBICv1020ee3vChRrc",
+  authDomain: "test-f7208.firebaseapp.com",
+  databaseURL: "https://test-f7208.firebaseio.com",
+  projectId: "test-f7208",
+  storageBucket: "test-f7208.appspot.com",
+  messagingSenderId: "788999287227",
+  appId: "1:788999287227:web:44db1d1868912aa7"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
