@@ -1,40 +1,80 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <div class="container">
+      <div class="row">
+          <div class="col s6">
+              <div class="card">
+                <div class="card-image">
+                  <img src="../assets/game.jpg">
+                  <!-- <span class="card-title">Game</span> -->
+                </div>
+                <div class="card-content">
+                  <p>Game last seen</p>
+                  {{this.game}}
+                </div>
+                <div class="">
+                  <a class="cards" href="https://www.facebook.com/panusron.phansod">Game</a>
+                </div>
+              </div>   
+        </div>
+        <div class="col s6">
+            <div class="card">
+                <div class="card-image">
+                  <img src="../assets/yin.jpg">
+                  <!-- <span class="card-title">Yin</span> -->
+                </div>
+                <div class="card-content">
+                  <p>Yin last seen</p>
+                  {{this.yin}}
+                </div>
+                <div class="">
+                  <a class="cards" href="https://www.facebook.com/kidnpeach">Yin</a>
+                </div>
+              </div>      
+          </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
-  }
+  },
+  data(){
+    return{
+      users:{},
+      game :'',
+      yin:'',
+    }
+  },
+  created(){
+    this.setFirebase()
+  },
+  methods:{
+    setFirebase(){
+    // The key of any non-root reference is the last token in the path
+    var adaRef = firebase
+    .database()
+    .ref("faces/")
+    .on("value", snapshot => {
+      // this.users.push(snapshot.val())
+      // let key = snapshot.key
+      // let val = snapshot.val()
+      // this.users[key] = val
+
+      let val = snapshot.val()
+      this.users = val
+      this.game = this.users['Game'].time
+      this.yin = this.users['Yin'].time
+    })
+    
+    }
+  },
 }
 </script>
 
@@ -53,5 +93,10 @@ li {
 }
 a {
   color: #42b983;
+}
+.cards{
+  color: #ffab40;
+  margin-right: 24px;
+  font-size: 25px;
 }
 </style>
